@@ -1,4 +1,4 @@
-import { EarmarksApi, GetEarmarkRequest, PostEarmarkRequest, UpdateEarmarkForCancelRequest, UpdateEarmarkForReleaseRequest } from "./generated/apis";
+import { EarmarksApi, GetEarmarkRequest, PostEarmarkRequest, UpdateEarmarkForReleaseRequest } from "./generated/apis";
 import { MTNEarmark } from "./generated/models";
 import { Configuration } from "./generated/runtime";
 import { getLogger, buildConfiguration, ConfigurationOptions, doWait } from "./util";

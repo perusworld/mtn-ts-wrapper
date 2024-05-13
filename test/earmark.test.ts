@@ -1,8 +1,8 @@
-import { EarmarkService, TokenService } from "../src/index";
 import {
-  GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest, GetEarmarkReleaseRequest, GetMintRequest,
-  buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv, rndId, uuid
-} from "../src/util";
+  EarmarkService, TokenService, GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest,
+  GetEarmarkReleaseRequest, GetMintRequest, buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv,
+  rndId, uuid
+} from "../src/index";
 import * as dotenv from 'dotenv';
 dotenv.config();
 

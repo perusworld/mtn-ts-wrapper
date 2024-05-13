@@ -1,5 +1,5 @@
-import { EarmarksApi, GetBalancesRequest, PostEarmarkRequest, SubmitOperationRequest, TokenManagementApi, UpdateEarmarkForDepositsRequest } from "./generated/apis";
-import { MTNEarmark, MTNTokenBalance, MTNTokenOperation } from "./generated/models";
+import { EarmarksApi, GetBalancesRequest, SubmitOperationRequest, TokenManagementApi, UpdateEarmarkForDepositsRequest } from "./generated/apis";
+import { MTNTokenBalance, MTNTokenOperation } from "./generated/models";
 import { Configuration } from "./generated/runtime";
 import { getLogger, buildConfiguration, ConfigurationOptions, doWait, GetMTNOperationRequest } from "./util";
 

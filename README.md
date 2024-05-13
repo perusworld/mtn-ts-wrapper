@@ -14,8 +14,7 @@ Look at the following testcases for examples. A version of [env file](.env.examp
 
 ### Token API Usage
 ```typescript
-    import { GetBalanceRequest, GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest, GetEarmarkReleaseRequest, GetMintRequest, GetTransferRequest, buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv, rndId, uuid } from "mtn-ts-wrapper/dist/util";
-    import { EarmarkService, TokenService } from "mtn-ts-wrapper";
+    import { EarmarkService, TokenService, GetBalanceRequest, GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest, GetEarmarkReleaseRequest, GetMintRequest, GetTransferRequest, buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv, rndId, uuid } from "mtn-ts-wrapper";
 
     const fromTestAlias = process.env.TEST_FROM_ALIAS || '';
     const toTestAlias = process.env.TEST_TO_ALIAS || '';
@@ -34,8 +33,7 @@ Look at the following testcases for examples. A version of [env file](.env.examp
 
 ### Earmark API Usage
 ```typescript
-    import { GetBalanceRequest, GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest, GetEarmarkReleaseRequest, GetMintRequest, GetTransferRequest, buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv, rndId, uuid } from "mtn-ts-wrapper/dist/util";
-    import { EarmarkService, TokenService } from "mtn-ts-wrapper";
+    import { EarmarkService, TokenService, GetBalanceRequest, GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest, GetEarmarkReleaseRequest, GetMintRequest, GetTransferRequest, buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv, rndId, uuid } from "mtn-ts-wrapper";
 
     const payerTestAlias = process.env.TEST_EARMARK_PAYER_ALIAS || '';
     const recipientTestAlias = process.env.TEST_EARMARK_RECIPIENT_ALIAS || '';

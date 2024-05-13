@@ -1,5 +1,7 @@
-import { TokenService } from "../src/index";
-import { GetBalanceRequest, GetBurnRequest, GetMintRequest, GetTransferRequest, buildTokenConfigurationFromEnv, uuid } from "../src/util";
+import {
+  TokenService, GetBalanceRequest, GetBurnRequest, GetMintRequest, GetTransferRequest,
+  buildTokenConfigurationFromEnv, uuid
+} from "../src/index";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
