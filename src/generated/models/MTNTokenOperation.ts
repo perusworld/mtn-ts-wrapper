@@ -28,21 +28,21 @@ import {
 
 import {
     MTNBurnOperation,
-     MTNBurnOperationFromJSONTyped,
-     MTNBurnOperationToJSON,
-     MTNMintOperation,
-     MTNMintOperationFromJSONTyped,
-     MTNMintOperationToJSON,
-     MTNTransferOperation,
-     MTNTransferOperationFromJSONTyped,
-     MTNTransferOperationToJSON,
-     instanceOfMTNBurnOperation,
-     instanceOfMTNMintOperation,
-     instanceOfMTNTransferOperation
+    MTNBurnOperationFromJSONTyped,
+    MTNBurnOperationToJSON,
+    MTNMintOperation,
+    MTNMintOperationFromJSONTyped,
+    MTNMintOperationToJSON,
+    MTNTransferOperation,
+    MTNTransferOperationFromJSONTyped,
+    MTNTransferOperationToJSON,
+    instanceOfMTNBurnOperation,
+    instanceOfMTNMintOperation,
+    instanceOfMTNTransferOperation
 } from './index';
 
 /**
- * An bank token operation.
+ * A bank token operation.
  * @export
  * @interface MTNTokenOperation
  */
@@ -108,7 +108,7 @@ export function MTNTokenOperationFromJSONTyped(json: any, ignoreDiscriminator: b
         }
     }
     return {
-        
+
         'tokenIdentifier': MTNTokenIdentifierFromJSON(json['tokenIdentifier']),
         'operationId': json['operationId'] == null ? undefined : json['operationId'],
         'status': json['status'] == null ? undefined : json['status'],
@@ -117,7 +117,7 @@ export function MTNTokenOperationFromJSONTyped(json: any, ignoreDiscriminator: b
     };
 }
 
-export function MTNTokenOperationToJSON(value?: Omit<MTNTokenOperation, 'operationId'|'status'|'blockchainTransactions'> | null): any {
+export function MTNTokenOperationToJSON(value?: Omit<MTNTokenOperation, 'operationId' | 'status' | 'blockchainTransactions'> | null): any {
     if (value == null) {
         return value;
     }
@@ -145,4 +145,5 @@ export function WrappedMTNTokenOperationToJSON(value?: MTNTokenOperation | null)
         'operationType': value['operationType'],
     };
 }
+
 

@@ -1,7 +1,7 @@
 import { Configuration, FetchParams, Middleware, RequestContext, ResponseContext } from './generated/runtime';
 import { createLogger, format, transports } from "winston";
 import * as fs from "fs";
-import { GetBalancesRequest, GetEarmarkRequest, GetOperationRequest, PostEarmarkRequest, SubmitOperationRequest, UpdateEarmarkForCancelRequest, UpdateEarmarkForDepositsRequest, UpdateEarmarkForReleaseRequest } from './generated/apis';
+import { GetBalancesRequest, GetEarmarkRequest, GetOperationRequest, GetTokenBalancesRequest, PostEarmarkRequest, SubmitOperationRequest, UpdateEarmarkForCancelRequest, UpdateEarmarkForDepositsRequest, UpdateEarmarkForReleaseRequest } from './generated/apis';
 import { MTNBurnOperation, MTNMintOperation, MTNPayer, MTNRecipient, MTNTokenIdentifier, MTNTransferOperation } from './generated/models';
 import { v4 as uuidv4 } from 'uuid';
 const mcAuth = require('mastercard-oauth1-signer');
@@ -177,6 +177,7 @@ export interface ConfigurationOptions {
   encryptionCertificateFile: string;
   privateKeyFile: string;
   ica: string;
+  currency?: string;
   tokenSymbol?: string;
   chainId: string;
   identifierType: string;
@@ -202,6 +203,7 @@ export const buildTokenConfigurationFromEnv = (): ConfigurationOptions => {
     encryptionCertificateFile: process.env.TOKEN_ENCRYPTION_CERTIFICATE_FILE!,
     privateKeyFile: process.env.TOKEN_PRIVATE_KEY_FILE!,
     ica: process.env.TOKEN_ICA!,
+    currency: process.env.TOKEN_CURRENCY!,
     tokenSymbol: process.env.TOKEN_SYMBOL!,
     chainId: process.env.CHAIN_ID!,
     identifierType: process.env.IDENTIFIER_TYPE!
@@ -234,6 +236,15 @@ export const GetMTNOperationRequest = (ica: string, operationId: string): GetOpe
 export const GetBalanceRequest = (accountAlias: string | undefined, cfg: ConfigurationOptions): GetBalancesRequest => {
   return {
     ica: cfg.ica, mTNTokenBalance: {
+      tokenIdentifier: GetTokenIdentifier(cfg),
+      ...(accountAlias && { accountAlias })
+    }
+  };
+}
+
+export const GetTokenBalanceRequest = (accountAlias: string | undefined, cfg: ConfigurationOptions): GetTokenBalancesRequest => {
+  return {
+    ica: cfg.ica, currency: cfg.currency || '', mTNTokenizedDepositBalance: {
       tokenIdentifier: GetTokenIdentifier(cfg),
       ...(accountAlias && { accountAlias })
     }

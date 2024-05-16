@@ -17,6 +17,7 @@ export interface EarmarkSearchRequest {
     limit?: number;
     status?: string;
     sort?: string;
+    type?: string;
 }
 export interface GetEarmarkRequest {
     ica: string;

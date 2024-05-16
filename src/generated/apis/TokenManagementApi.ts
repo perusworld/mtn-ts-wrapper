@@ -25,6 +25,7 @@ import {
     MTNTokenBalanceFromJSON,
     MTNTokenBalanceToJSON,
     MTNTokenOperationFromJSON,
+    MTNTokenOperationToJSON,
     WrappedMTNTokenOperationToJSON,
 } from '../models/index';
 
@@ -52,6 +53,7 @@ export class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve the token balance for any crypto address or total supply of tokens. Request is expected to be encrypted.
      * Retrieve token balance.
+     * @deprecated
      */
     async getBalancesRaw(requestParameters: GetBalancesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MTNTokenBalance>> {
         if (requestParameters['ica'] == null) {
@@ -88,6 +90,7 @@ export class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve the token balance for any crypto address or total supply of tokens. Request is expected to be encrypted.
      * Retrieve token balance.
+     * @deprecated
      */
     async getBalances(requestParameters: GetBalancesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MTNTokenBalance> {
         const response = await this.getBalancesRaw(requestParameters, initOverrides);
@@ -97,6 +100,7 @@ export class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve details of a token operation. Response is expected to be encrypted.
      * Retrieve details of token operation.
+     * @deprecated
      */
     async getOperationRaw(requestParameters: GetOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MTNTokenOperation>> {
         if (requestParameters['ica'] == null) {
@@ -130,6 +134,7 @@ export class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve details of a token operation. Response is expected to be encrypted.
      * Retrieve details of token operation.
+     * @deprecated
      */
     async getOperation(requestParameters: GetOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MTNTokenOperation> {
         const response = await this.getOperationRaw(requestParameters, initOverrides);
@@ -139,6 +144,7 @@ export class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to submit an operation to either mint, transfer or burn tokens. Request and response are expected to be encrypted.
      * Submit token operation.
+     * @deprecated
      */
     async submitOperationRaw(requestParameters: SubmitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MTNTokenOperation>> {
         if (requestParameters['ica'] == null) {
@@ -186,6 +192,7 @@ export class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to submit an operation to either mint, transfer or burn tokens. Request and response are expected to be encrypted.
      * Submit token operation.
+     * @deprecated
      */
     async submitOperation(requestParameters: SubmitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MTNTokenOperation> {
         const response = await this.submitOperationRaw(requestParameters, initOverrides);

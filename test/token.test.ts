@@ -60,7 +60,7 @@ describe('Check token operations', () => {
     expect(burnResp?.operationId).toBeDefined();
     await tkn.waitForTokenOperation(burnResp?.operationId || '', cfg)
 
-    const balanceAfter = await tkn.getBalance(GetBalanceRequest(toTestAlias, cfg))
+    const balanceAfter = await tkn.getBalance(GetBalanceRequest(fromTestAlias, cfg))
     expect(balanceAfter?.balance).toBe((balanceBefore?.balance || 0));
 
   }, WAIT_TIME);

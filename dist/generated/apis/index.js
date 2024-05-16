@@ -18,6 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* eslint-disable */
 __exportStar(require("./AccountsApi"), exports);
 __exportStar(require("./AliasResolutionApi"), exports);
+__exportStar(require("./ConfirmationOfThePayeeApi"), exports);
 __exportStar(require("./CryptoAddressesApi"), exports);
 __exportStar(require("./EarmarksApi"), exports);
 __exportStar(require("./FiatManagementApi"), exports);
@@ -28,5 +29,6 @@ __exportStar(require("./PeerToPeerInstructionsApi"), exports);
 __exportStar(require("./ReportsApi"), exports);
 __exportStar(require("./TokenManagementApi"), exports);
 __exportStar(require("./TokenSettlementApi"), exports);
+__exportStar(require("./TokenizedDepositsManagementApi"), exports);
 __exportStar(require("./TravelRulesApi"), exports);
 //# sourceMappingURL=index.js.map

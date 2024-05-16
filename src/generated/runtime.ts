@@ -13,7 +13,7 @@
  */
 
 
-export const BASE_PATH = "https://api.mastercard.com/crypto".replace(/\/+$/, "");
+export const BASE_PATH = "https://api.cryptosolutions.mastercard.com".replace(/\/+$/, "");
 
 export interface ConfigurationParameters {
     basePath?: string; // override base path

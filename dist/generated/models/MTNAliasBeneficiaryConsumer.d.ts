@@ -34,6 +34,12 @@ export interface MTNAliasBeneficiaryConsumer {
      * @memberof MTNAliasBeneficiaryConsumer
      */
     cryptoAddress?: MTNCryptoAddressRiskScore;
+    /**
+     * The type of wallet associated with an account alias
+     * @type {string}
+     * @memberof MTNAliasBeneficiaryConsumer
+     */
+    walletType?: string;
 }
 /**
  * Check if a given object implements the MTNAliasBeneficiaryConsumer interface.

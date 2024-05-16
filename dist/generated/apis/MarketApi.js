@@ -30,6 +30,42 @@ const index_1 = require("../models/index");
  */
 class MarketApi extends runtime.BaseAPI {
     /**
+     * This endpoint allows retrieving Historical prices.
+     * Retrieve Historical prices.
+     */
+    getHistoricalPricesRaw(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (requestParameters['ica'] == null) {
+                throw new runtime.RequiredError('ica', 'Required parameter "ica" was null or undefined when calling getHistoricalPrices().');
+            }
+            if (requestParameters['historicalPricesFilter'] == null) {
+                throw new runtime.RequiredError('historicalPricesFilter', 'Required parameter "historicalPricesFilter" was null or undefined when calling getHistoricalPrices().');
+            }
+            const queryParameters = {};
+            if (requestParameters['historicalPricesFilter'] != null) {
+                queryParameters['historical_prices_filter'] = requestParameters['historicalPricesFilter'];
+            }
+            const headerParameters = {};
+            const response = yield this.request({
+                path: `/customers/{ica}/historical-prices`.replace(`{${"ica"}}`, encodeURIComponent(String(requestParameters['ica']))),
+                method: 'GET',
+                headers: headerParameters,
+                query: queryParameters,
+            }, initOverrides);
+            return new runtime.JSONApiResponse(response, (jsonValue) => (0, index_1.MTNHistoricalPricesFromJSON)(jsonValue));
+        });
+    }
+    /**
+     * This endpoint allows retrieving Historical prices.
+     * Retrieve Historical prices.
+     */
+    getHistoricalPrices(requestParameters, initOverrides) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const response = yield this.getHistoricalPricesRaw(requestParameters, initOverrides);
+            return yield response.value();
+        });
+    }
+    /**
      * This endpoint allows retrieving prices for one or more markets.
      * Retrieve prices.
      */

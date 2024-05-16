@@ -10,7 +10,11 @@
  * Do not edit the class manually.
  */
 import * as runtime from '../runtime';
-import type { MTNGetQuotesQuoteFilterParameter, MTNPrice, MTNQuote } from '../models/index';
+import type { MTNGetHistoricalPricesHistoricalPricesFilterParameter, MTNGetQuotesQuoteFilterParameter, MTNHistoricalPrices, MTNPrice, MTNQuote } from '../models/index';
+export interface GetHistoricalPricesRequest {
+    ica: string;
+    historicalPricesFilter: Omit<MTNGetHistoricalPricesHistoricalPricesFilterParameter, 'startDate' | 'endDate'>;
+}
 export interface GetPricesRequest {
     ica: string;
     asset?: Array<string>;
@@ -23,6 +27,16 @@ export interface GetQuotesRequest {
  *
  */
 export declare class MarketApi extends runtime.BaseAPI {
+    /**
+     * This endpoint allows retrieving Historical prices.
+     * Retrieve Historical prices.
+     */
+    getHistoricalPricesRaw(requestParameters: GetHistoricalPricesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MTNHistoricalPrices>>;
+    /**
+     * This endpoint allows retrieving Historical prices.
+     * Retrieve Historical prices.
+     */
+    getHistoricalPrices(requestParameters: GetHistoricalPricesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MTNHistoricalPrices>;
     /**
      * This endpoint allows retrieving prices for one or more markets.
      * Retrieve prices.

@@ -32,6 +32,7 @@ class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve the token balance for any crypto address or total supply of tokens. Request is expected to be encrypted.
      * Retrieve token balance.
+     * @deprecated
      */
     getBalancesRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -57,6 +58,7 @@ class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve the token balance for any crypto address or total supply of tokens. Request is expected to be encrypted.
      * Retrieve token balance.
+     * @deprecated
      */
     getBalances(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -67,6 +69,7 @@ class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve details of a token operation. Response is expected to be encrypted.
      * Retrieve details of token operation.
+     * @deprecated
      */
     getOperationRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -90,6 +93,7 @@ class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve details of a token operation. Response is expected to be encrypted.
      * Retrieve details of token operation.
+     * @deprecated
      */
     getOperation(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -100,6 +104,7 @@ class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to submit an operation to either mint, transfer or burn tokens. Request and response are expected to be encrypted.
      * Submit token operation.
+     * @deprecated
      */
     submitOperationRaw(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -131,6 +136,7 @@ class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to submit an operation to either mint, transfer or burn tokens. Request and response are expected to be encrypted.
      * Submit token operation.
+     * @deprecated
      */
     submitOperation(requestParameters, initOverrides) {
         return __awaiter(this, void 0, void 0, function* () {

@@ -23,7 +23,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextApiResponse = exports.BlobApiResponse = exports.VoidApiResponse = exports.JSONApiResponse = exports.canConsumeForm = exports.mapValues = exports.querystring = exports.COLLECTION_FORMATS = exports.RequiredError = exports.FetchError = exports.ResponseError = exports.BaseAPI = exports.DefaultConfig = exports.Configuration = exports.BASE_PATH = void 0;
-exports.BASE_PATH = "https://api.mastercard.com/crypto".replace(/\/+$/, "");
+exports.BASE_PATH = "https://api.cryptosolutions.mastercard.com".replace(/\/+$/, "");
 class Configuration {
     constructor(configuration = {}) {
         this.configuration = configuration;

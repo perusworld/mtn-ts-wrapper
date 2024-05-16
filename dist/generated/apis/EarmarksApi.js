@@ -51,6 +51,9 @@ class EarmarksApi extends runtime.BaseAPI {
             if (requestParameters['sort'] != null) {
                 queryParameters['sort'] = requestParameters['sort'];
             }
+            if (requestParameters['type'] != null) {
+                queryParameters['type'] = requestParameters['type'];
+            }
             const headerParameters = {};
             const response = yield this.request({
                 path: `/customers/{ica}/earmarks`.replace(`{${"ica"}}`, encodeURIComponent(String(requestParameters['ica']))),

@@ -28,6 +28,12 @@ export interface MTNOriginatorConsumer {
      * @memberof MTNOriginatorConsumer
      */
     cryptoAddress?: MTNCryptoAddressRiskScore;
+    /**
+     * The type of wallet associated with an account alias
+     * @type {string}
+     * @memberof MTNOriginatorConsumer
+     */
+    walletType?: string;
 }
 /**
  * Check if a given object implements the MTNOriginatorConsumer interface.

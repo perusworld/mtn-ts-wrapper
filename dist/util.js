@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetEarmarkReleaseRequest = exports.GetEarmarkDepositRequest = exports.GetEarmarkDetailsRequest = exports.GetEarmarkCreateRequest = exports.GetBurnRequest = exports.GetTransferRequest = exports.GetMintRequest = exports.GetBalanceRequest = exports.GetMTNOperationRequest = exports.GetTokenIdentifier = exports.buildEarmarkConfigurationFromEnv = exports.buildTokenConfigurationFromEnv = exports.buildConfiguration = exports.JWEMiddleware = exports.doWait = exports.snooze = exports.rndId = exports.uuid = exports.pathOf = exports.readString = exports.getLogger = exports.STR_DATE_FORMAT = exports.QUERY_DATE_FORMAT = void 0;
+exports.GetEarmarkReleaseRequest = exports.GetEarmarkDepositRequest = exports.GetEarmarkDetailsRequest = exports.GetEarmarkCreateRequest = exports.GetBurnRequest = exports.GetTransferRequest = exports.GetMintRequest = exports.GetTokenBalanceRequest = exports.GetBalanceRequest = exports.GetMTNOperationRequest = exports.GetTokenIdentifier = exports.buildEarmarkConfigurationFromEnv = exports.buildTokenConfigurationFromEnv = exports.buildConfiguration = exports.JWEMiddleware = exports.doWait = exports.snooze = exports.rndId = exports.uuid = exports.pathOf = exports.readString = exports.getLogger = exports.STR_DATE_FORMAT = exports.QUERY_DATE_FORMAT = void 0;
 const runtime_1 = require("./generated/runtime");
 const winston_1 = require("winston");
 const fs = require("fs");
@@ -174,6 +174,7 @@ const buildTokenConfigurationFromEnv = () => {
         encryptionCertificateFile: process.env.TOKEN_ENCRYPTION_CERTIFICATE_FILE,
         privateKeyFile: process.env.TOKEN_PRIVATE_KEY_FILE,
         ica: process.env.TOKEN_ICA,
+        currency: process.env.TOKEN_CURRENCY,
         tokenSymbol: process.env.TOKEN_SYMBOL,
         chainId: process.env.CHAIN_ID,
         identifierType: process.env.IDENTIFIER_TYPE
@@ -207,6 +208,12 @@ const GetBalanceRequest = (accountAlias, cfg) => {
     };
 };
 exports.GetBalanceRequest = GetBalanceRequest;
+const GetTokenBalanceRequest = (accountAlias, cfg) => {
+    return {
+        ica: cfg.ica, currency: cfg.currency || '', mTNTokenizedDepositBalance: Object.assign({ tokenIdentifier: (0, exports.GetTokenIdentifier)(cfg) }, (accountAlias && { accountAlias }))
+    };
+};
+exports.GetTokenBalanceRequest = GetTokenBalanceRequest;
 const GetMintRequest = (requestId, to, amount, cfg) => {
     const mTNTokenOperation = {
         tokenIdentifier: (0, exports.GetTokenIdentifier)(cfg),

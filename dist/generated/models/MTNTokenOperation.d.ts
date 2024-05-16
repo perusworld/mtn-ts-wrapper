@@ -12,7 +12,7 @@
 import type { MTNBlockchainTransaction } from './MTNBlockchainTransaction';
 import type { MTNTokenIdentifier } from './MTNTokenIdentifier';
 /**
- * An bank token operation.
+ * A bank token operation.
  * @export
  * @interface MTNTokenOperation
  */

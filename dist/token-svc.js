@@ -22,9 +22,13 @@ class TokenService {
      */
     constructor(cfg) {
         this.configuration = (0, util_1.buildConfiguration)(cfg);
+        this.td = new apis_1.TokenizedDepositsManagementApi(this.configuration);
         this.tkn = new apis_1.TokenManagementApi(this.configuration);
         this.em = new apis_1.EarmarksApi(this.configuration);
     }
+    /**
+     * @deprecated
+     */
     getBalance(req) {
         return __awaiter(this, void 0, void 0, function* () {
             let ret = undefined;
@@ -37,6 +41,21 @@ class TokenService {
             return ret;
         });
     }
+    getTokenBalances(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let ret = undefined;
+            try {
+                ret = yield this.td.getTokenBalances(req);
+            }
+            catch (error) {
+                logger.error(error);
+            }
+            return ret;
+        });
+    }
+    /**
+     * @deprecated
+     */
     submitOperation(req) {
         return __awaiter(this, void 0, void 0, function* () {
             let ret = undefined;
@@ -62,6 +81,9 @@ class TokenService {
             return ret;
         });
     }
+    /**
+     * @deprecated
+     */
     waitForTokenOperation(operationId_1, cfg_1) {
         return __awaiter(this, arguments, void 0, function* (operationId, cfg, sleepTime = 1000, maxRetry = 15) {
             let ret = false;

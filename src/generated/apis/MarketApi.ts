@@ -16,20 +16,31 @@
 import * as runtime from '../runtime';
 import type {
   MTNErrorResponse,
+  MTNGetHistoricalPricesHistoricalPricesFilterParameter,
   MTNGetQuotesQuoteFilterParameter,
+  MTNHistoricalPrices,
   MTNPrice,
   MTNQuote,
 } from '../models/index';
 import {
     MTNErrorResponseFromJSON,
     MTNErrorResponseToJSON,
+    MTNGetHistoricalPricesHistoricalPricesFilterParameterFromJSON,
+    MTNGetHistoricalPricesHistoricalPricesFilterParameterToJSON,
     MTNGetQuotesQuoteFilterParameterFromJSON,
     MTNGetQuotesQuoteFilterParameterToJSON,
+    MTNHistoricalPricesFromJSON,
+    MTNHistoricalPricesToJSON,
     MTNPriceFromJSON,
     MTNPriceToJSON,
     MTNQuoteFromJSON,
     MTNQuoteToJSON,
 } from '../models/index';
+
+export interface GetHistoricalPricesRequest {
+    ica: string;
+    historicalPricesFilter: Omit<MTNGetHistoricalPricesHistoricalPricesFilterParameter, 'startDate'|'endDate'>;
+}
 
 export interface GetPricesRequest {
     ica: string;
@@ -45,6 +56,52 @@ export interface GetQuotesRequest {
  * 
  */
 export class MarketApi extends runtime.BaseAPI {
+
+    /**
+     * This endpoint allows retrieving Historical prices.
+     * Retrieve Historical prices.
+     */
+    async getHistoricalPricesRaw(requestParameters: GetHistoricalPricesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MTNHistoricalPrices>> {
+        if (requestParameters['ica'] == null) {
+            throw new runtime.RequiredError(
+                'ica',
+                'Required parameter "ica" was null or undefined when calling getHistoricalPrices().'
+            );
+        }
+
+        if (requestParameters['historicalPricesFilter'] == null) {
+            throw new runtime.RequiredError(
+                'historicalPricesFilter',
+                'Required parameter "historicalPricesFilter" was null or undefined when calling getHistoricalPrices().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['historicalPricesFilter'] != null) {
+            queryParameters['historical_prices_filter'] = requestParameters['historicalPricesFilter'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/customers/{ica}/historical-prices`.replace(`{${"ica"}}`, encodeURIComponent(String(requestParameters['ica']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => MTNHistoricalPricesFromJSON(jsonValue));
+    }
+
+    /**
+     * This endpoint allows retrieving Historical prices.
+     * Retrieve Historical prices.
+     */
+    async getHistoricalPrices(requestParameters: GetHistoricalPricesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MTNHistoricalPrices> {
+        const response = await this.getHistoricalPricesRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      * This endpoint allows retrieving prices for one or more markets.

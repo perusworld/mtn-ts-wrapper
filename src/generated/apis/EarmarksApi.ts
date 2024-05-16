@@ -37,6 +37,7 @@ export interface EarmarkSearchRequest {
     limit?: number;
     status?: string;
     sort?: string;
+    type?: string;
 }
 
 export interface GetEarmarkRequest {
@@ -106,6 +107,10 @@ export class EarmarksApi extends runtime.BaseAPI {
 
         if (requestParameters['sort'] != null) {
             queryParameters['sort'] = requestParameters['sort'];
+        }
+
+        if (requestParameters['type'] != null) {
+            queryParameters['type'] = requestParameters['type'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

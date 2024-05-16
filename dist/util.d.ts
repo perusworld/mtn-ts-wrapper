@@ -1,5 +1,5 @@
 import { Configuration, FetchParams, Middleware, RequestContext, ResponseContext } from './generated/runtime';
-import { GetBalancesRequest, GetEarmarkRequest, GetOperationRequest, PostEarmarkRequest, SubmitOperationRequest, UpdateEarmarkForDepositsRequest, UpdateEarmarkForReleaseRequest } from './generated/apis';
+import { GetBalancesRequest, GetEarmarkRequest, GetOperationRequest, GetTokenBalancesRequest, PostEarmarkRequest, SubmitOperationRequest, UpdateEarmarkForDepositsRequest, UpdateEarmarkForReleaseRequest } from './generated/apis';
 import { MTNPayer, MTNRecipient, MTNTokenIdentifier } from './generated/models';
 export declare const QUERY_DATE_FORMAT = "yyyy-MM-dd";
 export declare const STR_DATE_FORMAT = "LLL dd yyyy";
@@ -33,6 +33,7 @@ export interface ConfigurationOptions {
     encryptionCertificateFile: string;
     privateKeyFile: string;
     ica: string;
+    currency?: string;
     tokenSymbol?: string;
     chainId: string;
     identifierType: string;
@@ -43,6 +44,7 @@ export declare const buildEarmarkConfigurationFromEnv: () => ConfigurationOption
 export declare const GetTokenIdentifier: (cfg: ConfigurationOptions) => MTNTokenIdentifier;
 export declare const GetMTNOperationRequest: (ica: string, operationId: string) => GetOperationRequest;
 export declare const GetBalanceRequest: (accountAlias: string | undefined, cfg: ConfigurationOptions) => GetBalancesRequest;
+export declare const GetTokenBalanceRequest: (accountAlias: string | undefined, cfg: ConfigurationOptions) => GetTokenBalancesRequest;
 export declare const GetMintRequest: (requestId: string, to: string, amount: number, cfg: ConfigurationOptions) => SubmitOperationRequest;
 export declare const GetTransferRequest: (requestId: string, from: string, to: string, amount: number, cfg: ConfigurationOptions) => SubmitOperationRequest;
 export declare const GetBurnRequest: (requestId: string, from: string, amount: number, cfg: ConfigurationOptions) => SubmitOperationRequest;

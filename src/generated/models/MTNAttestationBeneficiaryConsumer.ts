@@ -44,6 +44,12 @@ export interface MTNAttestationBeneficiaryConsumer {
      * @memberof MTNAttestationBeneficiaryConsumer
      */
     cryptoAddress?: MTNCryptoAddressRiskScore;
+    /**
+     * The type of wallet associated with an account alias
+     * @type {string}
+     * @memberof MTNAttestationBeneficiaryConsumer
+     */
+    walletType?: string;
 }
 
 /**
@@ -66,6 +72,7 @@ export function MTNAttestationBeneficiaryConsumerFromJSONTyped(json: any, ignore
         'attestation': json['attestation'] == null ? undefined : json['attestation'],
         'accountAlias': json['accountAlias'] == null ? undefined : json['accountAlias'],
         'cryptoAddress': json['cryptoAddress'] == null ? undefined : MTNCryptoAddressRiskScoreFromJSON(json['cryptoAddress']),
+        'walletType': json['walletType'] == null ? undefined : json['walletType'],
     };
 }
 
@@ -77,6 +84,7 @@ export function MTNAttestationBeneficiaryConsumerToJSON(value?: MTNAttestationBe
         
         'accountAlias': value['accountAlias'],
         'cryptoAddress': MTNCryptoAddressRiskScoreToJSON(value['cryptoAddress']),
+        'walletType': value['walletType'],
     };
 }
 

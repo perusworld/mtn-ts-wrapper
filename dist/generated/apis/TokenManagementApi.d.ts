@@ -31,31 +31,37 @@ export declare class TokenManagementApi extends runtime.BaseAPI {
     /**
      * This endpoint allows a consumer to retrieve the token balance for any crypto address or total supply of tokens. Request is expected to be encrypted.
      * Retrieve token balance.
+     * @deprecated
      */
     getBalancesRaw(requestParameters: GetBalancesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MTNTokenBalance>>;
     /**
      * This endpoint allows a consumer to retrieve the token balance for any crypto address or total supply of tokens. Request is expected to be encrypted.
      * Retrieve token balance.
+     * @deprecated
      */
     getBalances(requestParameters: GetBalancesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MTNTokenBalance>;
     /**
      * This endpoint allows a consumer to retrieve details of a token operation. Response is expected to be encrypted.
      * Retrieve details of token operation.
+     * @deprecated
      */
     getOperationRaw(requestParameters: GetOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MTNTokenOperation>>;
     /**
      * This endpoint allows a consumer to retrieve details of a token operation. Response is expected to be encrypted.
      * Retrieve details of token operation.
+     * @deprecated
      */
     getOperation(requestParameters: GetOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MTNTokenOperation>;
     /**
      * This endpoint allows a consumer to submit an operation to either mint, transfer or burn tokens. Request and response are expected to be encrypted.
      * Submit token operation.
+     * @deprecated
      */
     submitOperationRaw(requestParameters: SubmitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<MTNTokenOperation>>;
     /**
      * This endpoint allows a consumer to submit an operation to either mint, transfer or burn tokens. Request and response are expected to be encrypted.
      * Submit token operation.
+     * @deprecated
      */
     submitOperation(requestParameters: SubmitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<MTNTokenOperation>;
 }

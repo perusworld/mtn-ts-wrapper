@@ -34,6 +34,7 @@ function MTNAliasBeneficiaryConsumerFromJSONTyped(json, ignoreDiscriminator) {
         'vaspName': json['vaspName'] == null ? undefined : json['vaspName'],
         'accountAlias': json['accountAlias'] == null ? undefined : json['accountAlias'],
         'cryptoAddress': json['cryptoAddress'] == null ? undefined : (0, MTNCryptoAddressRiskScore_1.MTNCryptoAddressRiskScoreFromJSON)(json['cryptoAddress']),
+        'walletType': json['walletType'] == null ? undefined : json['walletType'],
     };
 }
 exports.MTNAliasBeneficiaryConsumerFromJSONTyped = MTNAliasBeneficiaryConsumerFromJSONTyped;
@@ -45,6 +46,7 @@ function MTNAliasBeneficiaryConsumerToJSON(value) {
         'vaspName': value['vaspName'],
         'accountAlias': value['accountAlias'],
         'cryptoAddress': (0, MTNCryptoAddressRiskScore_1.MTNCryptoAddressRiskScoreToJSON)(value['cryptoAddress']),
+        'walletType': value['walletType'],
     };
 }
 exports.MTNAliasBeneficiaryConsumerToJSON = MTNAliasBeneficiaryConsumerToJSON;

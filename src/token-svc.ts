@@ -1,5 +1,5 @@
-import { EarmarksApi, GetBalancesRequest, SubmitOperationRequest, TokenManagementApi, UpdateEarmarkForDepositsRequest } from "./generated/apis";
-import { MTNTokenBalance, MTNTokenOperation } from "./generated/models";
+import { EarmarksApi, GetBalancesRequest, GetTokenBalancesRequest, SubmitOperationRequest, TokenManagementApi, TokenizedDepositsManagementApi, UpdateEarmarkForDepositsRequest } from "./generated/apis";
+import { MTNTokenBalance, MTNTokenOperation, MTNTokenizedDepositBalance } from "./generated/models";
 import { Configuration } from "./generated/runtime";
 import { getLogger, buildConfiguration, ConfigurationOptions, doWait, GetMTNOperationRequest } from "./util";
 
@@ -8,6 +8,7 @@ const logger = getLogger('TokenService');
 export class TokenService {
 
   private configuration!: Configuration;
+  private td!: TokenizedDepositsManagementApi;
   private tkn!: TokenManagementApi;
   private em!: EarmarksApi;
 
@@ -19,10 +20,14 @@ export class TokenService {
    */
   constructor(cfg: ConfigurationOptions) {
     this.configuration = buildConfiguration(cfg);
+    this.td = new TokenizedDepositsManagementApi(this.configuration);
     this.tkn = new TokenManagementApi(this.configuration);
     this.em = new EarmarksApi(this.configuration);
   }
 
+  /**
+   * @deprecated
+   */
   public async getBalance(req: GetBalancesRequest): Promise<MTNTokenBalance | undefined> {
     let ret = undefined;
     try {
@@ -33,7 +38,19 @@ export class TokenService {
     return ret;
   }
 
+  public async getTokenBalances(req: GetTokenBalancesRequest): Promise<MTNTokenizedDepositBalance | undefined> {
+    let ret = undefined;
+    try {
+      ret = await this.td.getTokenBalances(req);
+    } catch (error) {
+      logger.error(error)
+    }
+    return ret;
+  }
 
+  /**
+   * @deprecated
+   */
   public async submitOperation(req: SubmitOperationRequest): Promise<MTNTokenOperation | undefined> {
     let ret = undefined;
     try {
@@ -55,6 +72,9 @@ export class TokenService {
     return ret;
   }
 
+  /**
+   * @deprecated
+   */
   public async waitForTokenOperation(operationId: string, cfg: ConfigurationOptions, sleepTime = 1000, maxRetry = 15): Promise<boolean> {
     let ret = false;
     try {
