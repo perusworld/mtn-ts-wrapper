@@ -1,5 +1,5 @@
-import { EarmarksApi, GetEarmarkRequest, PostEarmarkRequest, UpdateEarmarkForReleaseRequest } from "./generated/apis";
-import { MTNEarmark } from "./generated/models";
+import { EarmarkSearchRequest, EarmarksApi, GetEarmarkRequest, PostEarmarkRequest, UpdateEarmarkForReleaseRequest } from "./generated/apis";
+import { MTNEarmark, MTNEarmarks } from "./generated/models";
 import { Configuration } from "./generated/runtime";
 import { getLogger, buildConfiguration, ConfigurationOptions, doWait } from "./util";
 
@@ -25,6 +25,16 @@ export class EarmarkService {
     let ret = undefined;
     try {
       ret = await this.em.getEarmark(req);
+    } catch (error) {
+      logger.error(error);
+    }
+    return ret;
+  }
+
+  public async searchEarmarks(req: EarmarkSearchRequest): Promise<MTNEarmarks | undefined> {
+    let ret = undefined;
+    try {
+      ret = await this.em.earmarkSearch(req);
     } catch (error) {
       logger.error(error);
     }

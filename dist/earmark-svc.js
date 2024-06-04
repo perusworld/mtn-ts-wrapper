@@ -36,6 +36,18 @@ class EarmarkService {
             return ret;
         });
     }
+    searchEarmarks(req) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let ret = undefined;
+            try {
+                ret = yield this.em.earmarkSearch(req);
+            }
+            catch (error) {
+                logger.error(error);
+            }
+            return ret;
+        });
+    }
     createEarmark(req) {
         return __awaiter(this, void 0, void 0, function* () {
             let ret = undefined;

@@ -78,4 +78,25 @@ describe('Check earmark operations', () => {
 
   }, WAIT_TIME);
 
+  it('should search earmark', async () => {
+
+    const externalReference = rndId();
+    const resp = await em.createEarmark(GetEarmarkCreateRequest(emCfg, externalReference, [{
+      accountAlias: payerTestAlias, amount: amt
+    }], [{
+      accountAlias: recipientTestAlias, amount: amt
+    }]));
+
+    const limit = 100, sort = '-CREATED_DATE';
+    const ems = await em.searchEarmarks({ica: emCfg.ica, limit, sort});
+    expect(ems).toBeDefined();
+    expect(ems?.data).toBeDefined();
+    expect(ems?.data?.total).toBeDefined();
+    expect(ems?.data?.total).toBeGreaterThan(0);
+    const found = ems?.data?.items?.find(entry => entry.earmarkId === resp?.earmarkId);
+    expect(found).toBeDefined();
+    expect(found?.externalReference).toBe(externalReference);
+
+  });
+
 });
