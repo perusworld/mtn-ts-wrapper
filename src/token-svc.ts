@@ -80,8 +80,8 @@ export class TokenService {
     return ret;
   }
 
-  public async waitForTokenOperation(operationId: string, cfg: ConfigurationOptions, sleepTime = 1000, maxRetry = 15): Promise<boolean> {
-    let ret = false;
+  public async waitForTokenOperation(operationId: string, cfg: ConfigurationOptions, sleepTime = 1000, maxRetry = 15): Promise<string> {
+    let ret = 'ERROR';
     try {
       ret = await doWait(async () => {
         const resp = await this.td.getTokenOperation(GetMTNTokenOperationRequest(cfg.ica, operationId));

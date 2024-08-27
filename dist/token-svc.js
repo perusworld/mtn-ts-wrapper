@@ -88,7 +88,7 @@ class TokenService {
     }
     waitForTokenOperation(operationId_1, cfg_1) {
         return __awaiter(this, arguments, void 0, function* (operationId, cfg, sleepTime = 1000, maxRetry = 15) {
-            let ret = false;
+            let ret = 'ERROR';
             try {
                 ret = yield (0, util_1.doWait)(() => __awaiter(this, void 0, void 0, function* () {
                     const resp = yield this.td.getTokenOperation((0, util_1.GetMTNTokenOperationRequest)(cfg.ica, operationId));

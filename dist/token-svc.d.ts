@@ -17,5 +17,5 @@ export declare class TokenService {
     transfer(req: SubmitTransferOperationRequest): Promise<MTNTokenizedTransferOperationInformation | undefined>;
     burn(req: SubmitBurnOperationRequest): Promise<MTNTokenizedBurnOperationInformation | undefined>;
     depositIntoEarmark(req: UpdateEarmarkForDepositsRequest): Promise<boolean>;
-    waitForTokenOperation(operationId: string, cfg: ConfigurationOptions, sleepTime?: number, maxRetry?: number): Promise<boolean>;
+    waitForTokenOperation(operationId: string, cfg: ConfigurationOptions, sleepTime?: number, maxRetry?: number): Promise<string>;
 }
