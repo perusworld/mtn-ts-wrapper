@@ -61,7 +61,7 @@ describe('Check earmark operations', () => {
       accountAlias: recipientTestAlias, amount: amt
     }]));
 
-    const mintResp = await tkn.submitOperation(GetMintRequest(uuid(), payerTestAlias, amt, tknCfg));
+    const mintResp = await tkn.mint(GetMintRequest(uuid(), payerTestAlias, amt, tknCfg));
     await tkn.waitForTokenOperation(mintResp?.operationId || '', tknCfg);
 
     const deposited = await tkn.depositIntoEarmark(GetEarmarkDepositRequest(tknCfg, created?.earmarkId || '', payerTestAlias, amt));

@@ -1,7 +1,7 @@
 import { Configuration, FetchParams, Middleware, RequestContext, ResponseContext } from './generated/runtime';
 import { createLogger, format, transports } from "winston";
 import * as fs from "fs";
-import { GetBalancesRequest, GetEarmarkRequest, GetOperationRequest, GetTokenBalancesRequest, PostEarmarkRequest, SubmitOperationRequest, UpdateEarmarkForCancelRequest, UpdateEarmarkForDepositsRequest, UpdateEarmarkForReleaseRequest } from './generated/apis';
+import { GetBalancesRequest, GetEarmarkRequest, GetOperationRequest, GetTokenBalancesRequest, GetTokenOperationRequest, PostEarmarkRequest, SubmitBurnOperationRequest, SubmitMintOperationRequest, SubmitOperationRequest, SubmitTransferOperationRequest, UpdateEarmarkForCancelRequest, UpdateEarmarkForDepositsRequest, UpdateEarmarkForReleaseRequest } from './generated/apis';
 import { MTNBurnOperation, MTNMintOperation, MTNPayer, MTNRecipient, MTNTokenIdentifier, MTNTransferOperation } from './generated/models';
 import { v4 as uuidv4 } from 'uuid';
 const mcAuth = require('mastercard-oauth1-signer');
@@ -228,56 +228,46 @@ export const GetTokenIdentifier = (cfg: ConfigurationOptions): MTNTokenIdentifie
 }
 
 
-export const GetMTNOperationRequest = (ica: string, operationId: string): GetOperationRequest => {
+export const GetMTNTokenOperationRequest = (ica: string, operationId: string): GetTokenOperationRequest => {
   return { ica, operationId };
-}
-
-
-export const GetBalanceRequest = (accountAlias: string | undefined, cfg: ConfigurationOptions): GetBalancesRequest => {
-  return {
-    ica: cfg.ica, mTNTokenBalance: {
-      tokenIdentifier: GetTokenIdentifier(cfg),
-      ...(accountAlias && { accountAlias })
-    }
-  };
 }
 
 export const GetTokenBalanceRequest = (accountAlias: string | undefined, cfg: ConfigurationOptions): GetTokenBalancesRequest => {
   return {
-    ica: cfg.ica, currency: cfg.currency || '', mTNTokenizedDepositBalance: {
+    ica: cfg.ica, currency: cfg.currency || 'USD', mTNTokenizedDepositBalance: {
       tokenIdentifier: GetTokenIdentifier(cfg),
       ...(accountAlias && { accountAlias })
     }
   };
 }
 
-export const GetMintRequest = (requestId: string, to: string, amount: number, cfg: ConfigurationOptions): SubmitOperationRequest => {
-  const mTNTokenOperation: MTNMintOperation = {
+export const GetMintRequest = (requestId: string, to: string, amount: number, cfg: ConfigurationOptions): SubmitMintOperationRequest => {
+  const mTNTokenizedMintOperation: MTNMintOperation = {
     tokenIdentifier: GetTokenIdentifier(cfg),
     operationType: 'MINT', to, amount
   }
   return {
-    ica: cfg.ica, idempotencyKey: requestId, mTNTokenOperation
+    ica: cfg.ica, currency: cfg.currency || 'USD', idempotencyKey: requestId, mTNTokenizedMintOperation
   };
 }
 
-export const GetTransferRequest = (requestId: string, from: string, to: string, amount: number, cfg: ConfigurationOptions): SubmitOperationRequest => {
-  const mTNTokenOperation: MTNTransferOperation = {
+export const GetTransferRequest = (requestId: string, from: string, to: string, amount: number, cfg: ConfigurationOptions): SubmitTransferOperationRequest => {
+  const mTNTokenizedTransferOperation: MTNTransferOperation = {
     tokenIdentifier: GetTokenIdentifier(cfg),
     operationType: 'TRANSFER', from, to, amount
   }
   return {
-    ica: cfg.ica, idempotencyKey: requestId, mTNTokenOperation
+    ica: cfg.ica, currency: cfg.currency || 'USD', idempotencyKey: requestId, mTNTokenizedTransferOperation
   };
 }
 
-export const GetBurnRequest = (requestId: string, from: string, amount: number, cfg: ConfigurationOptions): SubmitOperationRequest => {
-  const mTNTokenOperation: MTNBurnOperation = {
+export const GetBurnRequest = (requestId: string, from: string, amount: number, cfg: ConfigurationOptions): SubmitBurnOperationRequest => {
+  const mTNTokenizedBurnOperation: MTNBurnOperation = {
     tokenIdentifier: GetTokenIdentifier(cfg),
     operationType: 'BURN', from, amount
   }
   return {
-    ica: cfg.ica, idempotencyKey: requestId, mTNTokenOperation
+    ica: cfg.ica, currency: cfg.currency || 'USD', idempotencyKey: requestId, mTNTokenizedBurnOperation
   };
 }
 

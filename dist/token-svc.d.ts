@@ -1,10 +1,9 @@
-import { GetBalancesRequest, GetTokenBalancesRequest, SubmitOperationRequest, UpdateEarmarkForDepositsRequest } from "./generated/apis";
-import { MTNTokenBalance, MTNTokenOperation, MTNTokenizedDepositBalance } from "./generated/models";
+import { GetTokenBalancesRequest, SubmitBurnOperationRequest, SubmitMintOperationRequest, SubmitTransferOperationRequest, UpdateEarmarkForDepositsRequest } from "./generated/apis";
+import { MTNTokenizedBurnOperationInformation, MTNTokenizedDepositBalance, MTNTokenizedMintOperationInformation, MTNTokenizedTransferOperationInformation } from "./generated/models";
 import { ConfigurationOptions } from "./util";
 export declare class TokenService {
     private configuration;
     private td;
-    private tkn;
     private em;
     /**
      * Constructor
@@ -13,18 +12,10 @@ export declare class TokenService {
      * @constructor
      */
     constructor(cfg: ConfigurationOptions);
-    /**
-     * @deprecated
-     */
-    getBalance(req: GetBalancesRequest): Promise<MTNTokenBalance | undefined>;
-    getTokenBalances(req: GetTokenBalancesRequest): Promise<MTNTokenizedDepositBalance | undefined>;
-    /**
-     * @deprecated
-     */
-    submitOperation(req: SubmitOperationRequest): Promise<MTNTokenOperation | undefined>;
+    getBalance(req: GetTokenBalancesRequest): Promise<MTNTokenizedDepositBalance | undefined>;
+    mint(req: SubmitMintOperationRequest): Promise<MTNTokenizedMintOperationInformation | undefined>;
+    transfer(req: SubmitTransferOperationRequest): Promise<MTNTokenizedTransferOperationInformation | undefined>;
+    burn(req: SubmitBurnOperationRequest): Promise<MTNTokenizedBurnOperationInformation | undefined>;
     depositIntoEarmark(req: UpdateEarmarkForDepositsRequest): Promise<boolean>;
-    /**
-     * @deprecated
-     */
     waitForTokenOperation(operationId: string, cfg: ConfigurationOptions, sleepTime?: number, maxRetry?: number): Promise<boolean>;
 }

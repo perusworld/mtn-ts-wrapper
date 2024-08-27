@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetEarmarkReleaseRequest = exports.GetEarmarkDepositRequest = exports.GetEarmarkDetailsRequest = exports.GetEarmarkCreateRequest = exports.GetBurnRequest = exports.GetTransferRequest = exports.GetMintRequest = exports.GetTokenBalanceRequest = exports.GetBalanceRequest = exports.GetMTNOperationRequest = exports.GetTokenIdentifier = exports.buildEarmarkConfigurationFromEnv = exports.buildTokenConfigurationFromEnv = exports.buildConfiguration = exports.JWEMiddleware = exports.doWait = exports.snooze = exports.rndId = exports.uuid = exports.pathOf = exports.readString = exports.getLogger = exports.STR_DATE_FORMAT = exports.QUERY_DATE_FORMAT = void 0;
+exports.GetEarmarkReleaseRequest = exports.GetEarmarkDepositRequest = exports.GetEarmarkDetailsRequest = exports.GetEarmarkCreateRequest = exports.GetBurnRequest = exports.GetTransferRequest = exports.GetMintRequest = exports.GetTokenBalanceRequest = exports.GetMTNTokenOperationRequest = exports.GetTokenIdentifier = exports.buildEarmarkConfigurationFromEnv = exports.buildTokenConfigurationFromEnv = exports.buildConfiguration = exports.JWEMiddleware = exports.doWait = exports.snooze = exports.rndId = exports.uuid = exports.pathOf = exports.readString = exports.getLogger = exports.STR_DATE_FORMAT = exports.QUERY_DATE_FORMAT = void 0;
 const runtime_1 = require("./generated/runtime");
 const winston_1 = require("winston");
 const fs = require("fs");
@@ -198,49 +198,43 @@ const GetTokenIdentifier = (cfg) => {
     return { chainId: cfg.chainId, identifierType: cfg.identifierType, identifierValue: cfg.tokenSymbol || '' };
 };
 exports.GetTokenIdentifier = GetTokenIdentifier;
-const GetMTNOperationRequest = (ica, operationId) => {
+const GetMTNTokenOperationRequest = (ica, operationId) => {
     return { ica, operationId };
 };
-exports.GetMTNOperationRequest = GetMTNOperationRequest;
-const GetBalanceRequest = (accountAlias, cfg) => {
-    return {
-        ica: cfg.ica, mTNTokenBalance: Object.assign({ tokenIdentifier: (0, exports.GetTokenIdentifier)(cfg) }, (accountAlias && { accountAlias }))
-    };
-};
-exports.GetBalanceRequest = GetBalanceRequest;
+exports.GetMTNTokenOperationRequest = GetMTNTokenOperationRequest;
 const GetTokenBalanceRequest = (accountAlias, cfg) => {
     return {
-        ica: cfg.ica, currency: cfg.currency || '', mTNTokenizedDepositBalance: Object.assign({ tokenIdentifier: (0, exports.GetTokenIdentifier)(cfg) }, (accountAlias && { accountAlias }))
+        ica: cfg.ica, currency: cfg.currency || 'USD', mTNTokenizedDepositBalance: Object.assign({ tokenIdentifier: (0, exports.GetTokenIdentifier)(cfg) }, (accountAlias && { accountAlias }))
     };
 };
 exports.GetTokenBalanceRequest = GetTokenBalanceRequest;
 const GetMintRequest = (requestId, to, amount, cfg) => {
-    const mTNTokenOperation = {
+    const mTNTokenizedMintOperation = {
         tokenIdentifier: (0, exports.GetTokenIdentifier)(cfg),
         operationType: 'MINT', to, amount
     };
     return {
-        ica: cfg.ica, idempotencyKey: requestId, mTNTokenOperation
+        ica: cfg.ica, currency: cfg.currency || 'USD', idempotencyKey: requestId, mTNTokenizedMintOperation
     };
 };
 exports.GetMintRequest = GetMintRequest;
 const GetTransferRequest = (requestId, from, to, amount, cfg) => {
-    const mTNTokenOperation = {
+    const mTNTokenizedTransferOperation = {
         tokenIdentifier: (0, exports.GetTokenIdentifier)(cfg),
         operationType: 'TRANSFER', from, to, amount
     };
     return {
-        ica: cfg.ica, idempotencyKey: requestId, mTNTokenOperation
+        ica: cfg.ica, currency: cfg.currency || 'USD', idempotencyKey: requestId, mTNTokenizedTransferOperation
     };
 };
 exports.GetTransferRequest = GetTransferRequest;
 const GetBurnRequest = (requestId, from, amount, cfg) => {
-    const mTNTokenOperation = {
+    const mTNTokenizedBurnOperation = {
         tokenIdentifier: (0, exports.GetTokenIdentifier)(cfg),
         operationType: 'BURN', from, amount
     };
     return {
-        ica: cfg.ica, idempotencyKey: requestId, mTNTokenOperation
+        ica: cfg.ica, currency: cfg.currency || 'USD', idempotencyKey: requestId, mTNTokenizedBurnOperation
     };
 };
 exports.GetBurnRequest = GetBurnRequest;
