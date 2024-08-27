@@ -14,7 +14,8 @@ Look at the following testcases for examples. A version of [env file](.env.examp
 
 ### Token API Usage
 ```typescript
-    import { EarmarkService, TokenService, GetBalanceRequest, GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest, GetEarmarkReleaseRequest, GetMintRequest, GetTransferRequest, buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv, rndId, uuid } from "mtn-ts-wrapper";
+    import { TokenService, GetBurnRequest, GetMintRequest, GetTransferRequest,
+  buildTokenConfigurationFromEnv, uuid,  GetTokenBalanceRequest } from "mtn-ts-wrapper";
 
     const fromTestAlias = process.env.TEST_FROM_ALIAS || '';
     const toTestAlias = process.env.TEST_TO_ALIAS || '';
@@ -22,18 +23,20 @@ Look at the following testcases for examples. A version of [env file](.env.examp
     const cfg = buildTokenConfigurationFromEnv();
     const tkn = new TokenService(cfg);
 
-    const balanceBefore = await tkn.getBalance(GetBalanceRequest(toTestAlias, cfg))
-    const mintResp = await tkn.submitOperation(GetMintRequest(uuid(), fromTestAlias, amt, cfg));
+    const balanceBefore = await tkn.getBalance(GetTokenBalanceRequest(toTestAlias, cfg))
+    const mintResp = await tkn.mint(GetMintRequest(uuid(), fromTestAlias, amt, cfg));
     await tkn.waitForTokenOperation(mintResp?.operationId || '', cfg)
-    const transferResp = await tkn.submitOperation(GetTransferRequest(uuid(), fromTestAlias, toTestAlias, amt, cfg));
+    const transferResp = await tkn.transfer(GetTransferRequest(uuid(), fromTestAlias, toTestAlias, amt, cfg));
     await tkn.waitForTokenOperation(transferResp?.operationId || '', cfg)
-    const balanceAfter = await tkn.getBalance(GetBalanceRequest(toTestAlias, cfg))
+    const balanceAfter = await tkn.getBalance(GetTokenBalanceRequest(toTestAlias, cfg))
 
 ```
 
 ### Earmark API Usage
 ```typescript
-    import { EarmarkService, TokenService, GetBalanceRequest, GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest, GetEarmarkReleaseRequest, GetMintRequest, GetTransferRequest, buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv, rndId, uuid } from "mtn-ts-wrapper";
+    import { EarmarkService, TokenService, GetEarmarkCreateRequest, GetEarmarkDepositRequest, GetEarmarkDetailsRequest,
+  GetEarmarkReleaseRequest, GetMintRequest, buildEarmarkConfigurationFromEnv, buildTokenConfigurationFromEnv, rndId, uuid
+ } from "mtn-ts-wrapper";
 
     const payerTestAlias = process.env.TEST_EARMARK_PAYER_ALIAS || '';
     const recipientTestAlias = process.env.TEST_EARMARK_RECIPIENT_ALIAS || '';
@@ -51,7 +54,7 @@ Look at the following testcases for examples. A version of [env file](.env.examp
       accountAlias: recipientTestAlias, amount: amt
     }]));
 
-    const mintResp = await tkn.submitOperation(GetMintRequest(uuid(), payerTestAlias, amt, tknCfg));
+    const mintResp = await tkn.mint(GetMintRequest(uuid(), payerTestAlias, amt, tknCfg));
     await tkn.waitForTokenOperation(mintResp?.operationId || '', tknCfg);
 
     const deposited = await tkn.depositIntoEarmark(GetEarmarkDepositRequest(tknCfg, created?.earmarkId || '', payerTestAlias, amt));
